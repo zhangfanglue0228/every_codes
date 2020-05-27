@@ -1,0 +1,1 @@
+## 运行alien_invasion.py即可开始游戏
