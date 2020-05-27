@@ -10,7 +10,7 @@ window = tk.Tk()
 window.geometry("280x100+400+300")
 window.title("tkinter版猜数游戏")
 window.resizable(False, False)
-window.attributes('-topmost', 1)  #总是在顶端
+window.attributes('-topmost', 1)  # 总是在顶端
 window.overrideredirect(True)  # 去除标题栏
 window.attributes('-alpha', 0.5)  # 半透明
 
