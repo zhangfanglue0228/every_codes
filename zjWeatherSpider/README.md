@@ -77,4 +77,4 @@ ITEM_PIPELINES = {
     'zjWeatherSpider.pipelines.ZjweatherspiderPipeline':1,
 }
 ```
-12. 切换到命令提示符环境，执行scrapy crawl everyCityinZJ 命令运行爬虫程序。
+12. 切换到命令提示符环境，执行`scrapy crawl everyCityinZJ`命令运行爬虫程序。
