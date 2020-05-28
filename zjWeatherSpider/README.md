@@ -1,6 +1,6 @@
 # Python使用scrapy框架爬取浙江各城市天气预报操作说明
 安 装 Python 扩 展 库 scrapy ， 然 后 编 写 爬 虫 项 目 ， 从 网 站
-http://www.weather.com.cn/zhejiang/index.shtml爬取浙江各城市的天气预报数据，并把爬取到的天气数据写入本地文本 weather.txt。
+`http://www.weather.com.cn/zhejiang/index.shtml`爬取浙江各城市的天气预报数据，并把爬取到的天气数据写入本地文本 weather.txt。
 1. 在命令提示符环境(安装Python的Scripts目录下)使用 pip install scrapy 命令安装 Python 扩展库 scrapy。
 2. 在命令提示符环境进入希望建立爬虫项目的文件夹中，使用 scrapy startproject zjWeatherSpider创建爬虫项目。
 3. 进入爬虫项目文件夹， 然后执行命令`scrapy genspider everyCityinZJ www.weather.com.cn`创建爬虫程序。
@@ -36,7 +36,7 @@ class EverycityinzjSpider(scrapy.Spider):
     pattern = '<a title=".*?" href="(.+?)" target="_blank">(.+?)</a>'
     for url in findall(pattern, contents):
         start_urls.append(url[0])
-        
+
     def parse(self, response):
         # 处理每个城市的天气预报页面数据
         item = ZjweatherspiderItem()
