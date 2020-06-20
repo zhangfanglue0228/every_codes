@@ -23,7 +23,7 @@ def distance(data1, data2):
     sum = 0
     for i in range(len(data1.features)):
         sum = sum + (data1.features[i] - data2.features[i]) ** 2
-    return round(sqrt(sum), 3)
+    return sum
 
 
 def create_data_list(data_list):
