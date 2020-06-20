@@ -82,11 +82,12 @@ def calu_distance(data_list):
                 data1.distance = max(distance(data1, data2), data1.distance)
 
 
-class_num = int(input('分类数量：'))
+kind_num = int(input('分类数量：') or 2)
+dc_num = float(input('截断距离：') or 80)
 
 data_list = []
 load_file(data_list)
-calu_density(data_list, dc=80)
+calu_density(data_list, dc=dc_num)
 calu_distance(data_list)
 
 data_temp_list = sorted(data_list, key=lambda x: x.density + x.distance, reverse=True)
@@ -94,13 +95,15 @@ data_temp_list = sorted(data_list, key=lambda x: x.density + x.distance, reverse
 # 分类
 for data in data_list:
     classification = []
-    for i in range(class_num):
+    for i in range(kind_num):
         classification.append(distance(data, data_temp_list[i]))
 
     data.kind = classification.index(min(classification))
 
 # 打印结果
-num = [0, 0]
+num = []
+for i in range(kind_num):
+    num.append(0)
 for data in data_list:
     num[data.kind] += 1
 

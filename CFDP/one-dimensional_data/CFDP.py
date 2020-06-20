@@ -1,6 +1,10 @@
 from math import sqrt
 from random import randint
 
+import matplotlib.pyplot as plt
+import matplotlib.cm as cm
+import numpy as np
+
 
 class Data():
     '''
@@ -37,7 +41,7 @@ def create_data_list(data_list):
         data_list.append(data)
 
 
-def calu_density(data_list, dc=120):
+def calu_density(data_list, dc):
     '''
     计算密度
     '''
@@ -65,11 +69,12 @@ def calu_distance(data_list):
                 data1.distance = max(distance(data1, data2), data1.distance)
 
 
-class_num = int(input('分类数量：'))
+kind_num = int(input('分类数量：') or 3)
+dc_num = float(input('截断距离：') or 100)
 
 data_list = []
 create_data_list(data_list)
-calu_density(data_list)
+calu_density(data_list, dc=dc_num)
 calu_distance(data_list)
 
 data_temp_list = sorted(data_list, key=lambda x: x.density + x.distance, reverse=True)
@@ -77,11 +82,16 @@ data_temp_list = sorted(data_list, key=lambda x: x.density + x.distance, reverse
 # 分类
 for data in data_list:
     classification = []
-    for i in range(class_num):
+    for i in range(kind_num):
         classification.append(distance(data, data_temp_list[i]))
 
     data.kind = classification.index(min(classification))
 
 # 打印结果
+colors = cm.rainbow(np.linspace(0, 1, kind_num))
+ax = plt.subplot()
 for data in data_list:
-    print(data.features, data.kind)
+    x = data.features[0]
+    y = data.features[1]
+    ax.scatter(x, y, alpha=0.6, c=colors[data.kind])
+plt.show()
