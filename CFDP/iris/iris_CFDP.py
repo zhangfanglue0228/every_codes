@@ -84,7 +84,7 @@ data_temp_list = sorted(data_list, key=lambda x: x.density + x.distance, reverse
 # 分类
 for data in data_list:
     classification = []
-    for i in range(class_num):
+    for i in range(kind_num):
         classification.append(distance(data, data_temp_list[i]))
 
     data.kind = classification.index(min(classification))
