@@ -50,7 +50,139 @@ final_data['gdpPercap'] = gdp
 
 final_data.columns = ['country', 'continent', 'year', 'pop', 'lifeExp', 'gdpPercap']
 
-fig = px.scatter(final_data, x="lifeExp", y="gdpPercap", animation_frame="year",
-                 animation_group="country",size="gdpPercap", color="continent",
-                 hover_name="country",log_x=True, size_max=45)
-plot(fig)
+# fig = px.scatter(final_data, x="lifeExp", y="gdpPercap", animation_frame="year",
+#                  animation_group="country",size="gdpPercap", color="continent",
+#                  hover_name="country",log_x=True, size_max=45)
+# plot(fig)
+
+
+# 自适应y轴
+years = [str(i) for i in range(2005, 2019)]
+
+for continent in final_data['continent']:
+    if continent not in continents:
+        continents.append(continent)
+
+figure = {
+    'data': [],
+    'layout': {},
+    'frames': []
+}
+
+# fill in most of layout
+figure['layout']['xaxis'] = {'range': [30, 85], 'title': '预期寿命'}
+figure['layout']['yaxis'] = {'title': '人均生产总值', 'type': 'log'}
+figure['layout']['hovermode'] = 'closest'
+figure['layout']['sliders'] = {
+    'args': [
+        'transition', {
+            'duration': 400,
+            'easing': 'cubic-in-out'
+        }
+    ],
+    'initialValue': '1952',
+    'plotlycommand': 'animate',
+    'values': years,
+    'visible': True
+}
+figure['layout']['updatemenus'] = [
+    {
+        'buttons': [
+            {
+                'args': [None, {'frame': {'duration': 500, 'redraw': False},
+                         'fromcurrent': True, 'transition': {'duration': 300, 'easing': 'quadratic-in-out'}}],
+                'label': 'Play',
+                'method': 'animate'
+            },
+            {
+                'args': [[None], {'frame': {'duration': 0, 'redraw': False}, 'mode': 'immediate',
+                'transition': {'duration': 0}}],
+                'label': 'Pause',
+                'method': 'animate'
+            }
+        ],
+        'direction': 'left',
+        'pad': {'r': 10, 't': 87},
+        'showactive': False,
+        'type': 'buttons',
+        'x': 0.1,
+        'xanchor': 'right',
+        'y': 0,
+        'yanchor': 'top'
+    }
+]
+
+sliders_dict = {
+    'active': 0,
+    'yanchor': 'top',
+    'xanchor': 'left',
+    'currentvalue': {
+        'font': {'size': 20},
+        'prefix': 'Year:',
+        'visible': True,
+        'xanchor': 'right'
+    },
+    'transition': {'duration': 300, 'easing': 'cubic-in-out'},
+    'pad': {'b': 10, 't': 50},
+    'len': 0.9,
+    'x': 0.1,
+    'y': 0,
+    'steps': []
+}
+
+# make data
+years = 1952
+for continent in continents:
+    dataset_by_year = final_data[final_data['year'] == year]
+    dataset_by_year_and_cont = dataset_by_year[dataset_by_year['continent'] == continent]
+
+    data_dict = {
+        'x': list(dataset_by_year_and_cont['lifeExp']),
+        'y': list(dataset_by_year_and_cont['gdpPercap']),
+        'mode': 'markers',
+        'text': list(dataset_by_year_and_cont['country']),
+        'marker': {
+            'sizemode': 'area',
+            'sizeref': 200000,
+            'size': list(dataset_by_year_and_cont['pop'])
+        },
+        'name': continent
+    }
+    figure['data'].append(data_dict)
+    
+# make frames
+for year in year_list:
+    frame = {'data': [], 'name': str(year)}
+    for continent in continents:
+        dataset_by_year = final_data[final_data['year'] == int(year)]
+        dataset_by_year_and_cont = dataset_by_year[dataset_by_year['continent'] == continent]
+
+        data_dict = {
+            'x': list(dataset_by_year_and_cont['lifeExp']),
+            'y': list(dataset_by_year_and_cont['gdpPercap']),
+            'mode': 'markers',
+            'text': list(dataset_by_year_and_cont['country']),
+            'marker': {
+                'sizemode': 'area',
+                'sizeref': 200000,
+                'size': list(dataset_by_year_and_cont['pop'])
+            },
+            'name': continent
+        }
+        frame['data'].append(data_dict)
+
+    figure['frames'].append(frame)
+    slider_step = {'args': [
+        [year],
+        {'frame': {'duration': 300, 'redraw': False},
+         'mode': 'immediate',
+       'transition': {'duration': 300}}
+     ],
+     'label': year,
+     'method': 'animate'}
+    sliders_dict['steps'].append(slider_step)
+
+    
+figure['layout']['sliders'] = [sliders_dict]
+
+plot(figure)
