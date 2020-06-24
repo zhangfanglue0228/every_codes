@@ -32,6 +32,7 @@ map = Map(options.InitOpts(bg_color="#ffffff",page_title='世界疫情分布')).
                 name_map=country_en_zh
                 )
 map.set_global_opts(title_opts=options.TitleOpts(title='世界新冠肺炎累计确诊图', pos_left='center'),
+                    legend_opts=options.LegendOpts(is_show=True, pos_left='left', pos_top='60%'),
                     visualmap_opts=options.VisualMapOpts(max_=1100000,is_piecewise=True,
                     pieces = [
                         {"max": 1000, 'color': '#ffeead', 'label': '1k人以下'},
