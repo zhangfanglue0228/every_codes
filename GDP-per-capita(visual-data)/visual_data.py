@@ -50,6 +50,7 @@ final_data['gdpPercap'] = gdp
 
 final_data.columns = ['country', 'continent', 'year', 'pop', 'lifeExp', 'gdpPercap']
 
+final_data.to_excel('pop_lifeExp_gdpPercap.xlsx')
 # fig = px.scatter(final_data, x="lifeExp", y="gdpPercap", animation_frame="year",
 #                  animation_group="country",size="gdpPercap", color="continent",
 #                  hover_name="country",log_x=True, size_max=45)
