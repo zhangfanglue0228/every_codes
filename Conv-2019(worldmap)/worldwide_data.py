@@ -24,7 +24,7 @@ for data in content2:
 
 world_data_list = list(world_data.items())
 
-map = Map(options.InitOpts(bg_color="#ffffff",page_title='世界疫情分布')).add(
+map = Map(options.InitOpts(width='1200px', height='600px', bg_color="#ffffff",page_title='世界疫情分布')).add(
                 series_name="累计确诊",  #标签名称
                 data_pair=world_data_list,   #传入数据
                 is_map_symbol_show=False,  #不显示标记
