@@ -50,18 +50,27 @@ final_data['gdpPercap'] = gdp
 
 final_data.columns = ['country', 'continent', 'year', 'pop', 'lifeExp', 'gdpPercap']
 
-test = list(data.gdpPercap)
+test = list(final_data.gdpPercap)
 while 0 in test:
     test.remove(0)
-data[data.gdpPercap.isin(test)]
-data.index = [i for i in range(len(data))]
+final_data = final_data[final_data.gdpPercap.isin(test)]
+
+test = list(final_data.lifeExp)
+while 0 in test:
+    test.remove(0)
+final_data = final_data[final_data.lifeExp.isin(test)]
+
+final_data.index = [i for i in range(len(final_data))]
 
 
 final_data.to_excel('pop_lifeExp_gdpPercap.xlsx')
+
+
 # fig = px.scatter(final_data, x="lifeExp", y="gdpPercap", animation_frame="year",
 #                  animation_group="country",size="gdpPercap", color="continent",
 #                  hover_name="country",log_x=True, size_max=45)
 # plot(fig)
+
 
 
 # 自适应y轴
@@ -79,7 +88,7 @@ figure = {
 }
 
 # fill in most of layout
-figure['layout']['xaxis'] = {'range': [30, 85], 'title': '预期寿命'}
+figure['layout']['xaxis'] = {'range': [40, 85], 'title': '预期寿命'}
 figure['layout']['yaxis'] = {'title': '人均生产总值', 'type': 'log'}
 figure['layout']['hovermode'] = 'closest'
 figure['layout']['sliders'] = {
@@ -89,7 +98,7 @@ figure['layout']['sliders'] = {
             'easing': 'cubic-in-out'
         }
     ],
-    'initialValue': '1952',
+    'initialValue': '2005',
     'plotlycommand': 'animate',
     'values': years,
     'visible': True
