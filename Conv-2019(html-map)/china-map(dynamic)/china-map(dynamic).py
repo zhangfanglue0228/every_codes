@@ -4,9 +4,9 @@ from pyecharts import options
 from pyecharts.charts import Timeline
 
 
+# 修改读取数据后的格式
 data = pd.read_excel('china_data.xlsx')
-data = data.T
-data.head(1)
+data = data.T  # 转置
 data.columns = data.iloc[0].tolist()
 data = data.drop(index=['Unnamed: 0'], axis=0)
 attr = data.columns.tolist()
