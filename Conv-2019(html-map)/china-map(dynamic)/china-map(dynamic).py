@@ -26,8 +26,8 @@ for i in range(len(data)):
         Map(options.InitOpts(width='2400px', height='1200px', bg_color="#ffffff",page_title='中国疫情地图'))
         .add(time, sequence_temp, maptype="china")
         .set_global_opts(
-            title_opts=opts.TitleOpts(title="全国疫情动态地图"),
-            visualmap_opts=opts.VisualMapOpts(max_=2000),
+            title_opts=options.TitleOpts(title="全国疫情动态地图"),
+            visualmap_opts=options.VisualMapOpts(max_=2000),
         )
     )
     #将地图加入时间轴对象
