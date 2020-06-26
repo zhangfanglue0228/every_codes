@@ -2,17 +2,17 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>中国疫情图</title>
+    <title>中国疫情地图</title>
             <script type="text/javascript" src="https://assets.pyecharts.org/assets/echarts.min.js"></script>
         <script type="text/javascript" src="https://assets.pyecharts.org/assets/maps/china.js"></script>
 
 </head>
 <body>
-    <div id="7501c50dd12c4b42a28fdf39025055aa" class="chart-container" style="width:1200px; height:600px;"></div>
+    <div id="39ed866d79e748dfbc8de5b99f25f831" class="chart-container" style="width:1200px; height:600px;"></div>
     <script>
-        var chart_7501c50dd12c4b42a28fdf39025055aa = echarts.init(
-            document.getElementById('7501c50dd12c4b42a28fdf39025055aa'), 'white', {renderer: 'canvas'});
-        var option_7501c50dd12c4b42a28fdf39025055aa = {
+        var chart_39ed866d79e748dfbc8de5b99f25f831 = echarts.init(
+            document.getElementById('39ed866d79e748dfbc8de5b99f25f831'), 'white', {renderer: 'canvas'});
+        var option_39ed866d79e748dfbc8de5b99f25f831 = {
     "backgroundColor": "#ffffff",
     "animation": true,
     "animationThreshold": 2000,
@@ -267,37 +267,43 @@
         "borderWidth": 0,
         "pieces": [
             {
+                "max": 10,
+                "color": "#fdebcf",
+                "label": "10\u4eba\u4ee5\u4e0b"
+            },
+            {
+                "min": 10,
                 "max": 100,
-                "color": "#ffeead",
-                "label": "100\u4eba\u4ee5\u4e0b"
+                "color": "#f59e83",
+                "label": "10~100\u4eba"
             },
             {
                 "min": 100,
                 "max": 500,
-                "color": "#f29c2b",
+                "color": "#e55a4e",
                 "label": "100~500\u4eba"
             },
             {
                 "min": 500,
-                "max": 2000,
-                "color": "#d9534f",
-                "label": "500~2000\u4eba"
+                "max": 1000,
+                "color": "#cb2a2f",
+                "label": "500~1000\u4eba"
             },
             {
-                "min": 2000,
-                "max": 5000,
-                "color": "#F71E35",
-                "label": "1000~5000\u4eba"
+                "min": 1000,
+                "max": 10000,
+                "color": "#811c24",
+                "label": "1000~10000\u4eba"
             },
             {
-                "min": 5000,
-                "color": "#C00000",
+                "min": 10000,
+                "color": "#4f070d",
                 "label": "5k\u4eba\u4ee5\u4e0a"
             }
         ]
     }
 };
-        chart_7501c50dd12c4b42a28fdf39025055aa.setOption(option_7501c50dd12c4b42a28fdf39025055aa);
+        chart_39ed866d79e748dfbc8de5b99f25f831.setOption(option_39ed866d79e748dfbc8de5b99f25f831);
     </script>
 </body>
 </html>

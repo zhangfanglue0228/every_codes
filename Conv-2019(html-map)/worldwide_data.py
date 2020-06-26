@@ -35,11 +35,11 @@ map.set_global_opts(title_opts=options.TitleOpts(title='世界新冠肺炎累计
                     legend_opts=options.LegendOpts(is_show=True, pos_left='left', pos_top='60%'),
                     visualmap_opts=options.VisualMapOpts(max_=1100000,is_piecewise=True,
                     pieces = [
-                        {"max": 1000, 'color': '#ffeead', 'label': '1k人以下'},
-                        {"min": 1000, "max": 50000, 'color': '#f29c2b', 'label': '1k~5w人'},
-                        {"min": 50000, "max": 200000, 'color': '#d9534f', 'label': '5w-20w人'},
-                        {"min": 200000, "max": 1000000, "color": '#F71E35', 'label': '20w-100w人'},
-                        {"min": 1000000, 'color': '#C00000', 'label': '100w以上'}]
+                        {"max": 1000, 'color': '#f59e83', 'label': '1k人以下'},
+                        {"min": 1000, "max": 50000, 'color': '#e55a4e', 'label': '1k~5w人'},
+                        {"min": 50000, "max": 200000, 'color': '#cb2a2f', 'label': '5w-20w人'},
+                        {"min": 200000, "max": 1000000, "color": '#811c24', 'label': '20w-100w人'},
+                        {"min": 1000000, 'color': '#4f070d', 'label': '100w以上'}]
                     ))
 
 #设置系列配置项
