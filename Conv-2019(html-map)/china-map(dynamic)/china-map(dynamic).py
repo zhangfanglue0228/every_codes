@@ -28,7 +28,7 @@ for i in range(len(data)):
         .set_global_opts(
             legend_opts=options.LegendOpts(is_show=True, pos_left='left', pos_top='50%'),
             title_opts=options.TitleOpts(title="全国疫情累计确诊动态地图"),
-            visualmap_opts=options.VisualMapOpts(max_=2000),
+            visualmap_opts=options.VisualMapOpts(max_=1000),
         )
     )
     #将地图加入时间轴对象
