@@ -60,6 +60,7 @@ final_data.to_excel('pop_lifeExp_gdpPercap.xlsx')
 # 自适应y轴
 years = [str(i) for i in range(2005, 2019)]
 
+continents = []
 for continent in final_data['continent']:
     if continent not in continents:
         continents.append(continent)
@@ -132,9 +133,9 @@ sliders_dict = {
 }
 
 # make data
-years = 1952
+years = 2005
 for continent in continents:
-    dataset_by_year = final_data[final_data['year'] == year]
+    dataset_by_year = final_data[final_data['year'] == years]
     dataset_by_year_and_cont = dataset_by_year[dataset_by_year['continent'] == continent]
 
     data_dict = {
