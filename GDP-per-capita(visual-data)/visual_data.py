@@ -9,24 +9,26 @@ for i in range(2005, 2018 + 1):
 year_list_country = year_list[:]
 year_list_country.insert(0, 'country')
 
+# 读取文件相关年份的数据
 country_data = pd.read_excel("Data Geographies - v1 - by Gapminder.xlsx", "list-of-countries-etc")[['name', 'five_regions']]
 life_exp_data = pd.read_excel("life_expectancy_years.xlsx")[year_list_country]
 pop_data = pd.read_excel("population_total.xlsx")[year_list_country]
 gdp_data = pd.read_excel("income_per_person_gdppercapita_ppp_inflation_adjusted.xlsx")[year_list_country]
 
 
-life_exp_data = life_exp_data.dropna(axis=0)
+life_exp_data.fillna(0, inplace=True)  # 将NaN值填充为0
 
 
+# 将每个国家重复14遍，年份为2005~2018，重新改变索引
 final_data = pd.DataFrame()
 for i in range(len(country_data)):
     a=country_data.loc[i]
     d=pd.DataFrame(a).T
     final_data = final_data.append([d]*14)
-
 final_data['year'] = year_list * 197
 final_data.index = [i for i in range(len(final_data))]
 
+# 读取对应数据，若在各个数据集中有相对应的国家，则有对应数据；无对应国家则无数据，用-1填充作为数据缺失
 gdp,life,pop = [],[],[]
 for i in range(len(final_data)):
     x = final_data.loc[i]['name']
@@ -34,46 +36,43 @@ for i in range(len(final_data)):
     if x in gdp_data['country'].values.tolist():
         gdp.append(int(gdp_data[(gdp_data['country']==x)][y]))
     else:
-        gdp.append(0)
+        gdp.append(-1)
     if x in life_exp_data['country'].values.tolist():
         life.append(int(life_exp_data[(life_exp_data['country']==x)][y]))
     else:
-        life.append(0)
+        life.append(-1)
     if x in pop_data['country'].values.tolist():
         pop.append(int(pop_data[(pop_data['country']==x)][y]))
     else:
-        pop.append(0)
+        pop.append(-1)
 
+# 将数据加入到DataFrame中
 final_data['pop'] = pop
 final_data['lifeExp'] = life
 final_data['gdpPercap'] = gdp
 
+# 重置列标
 final_data.columns = ['country', 'continent', 'year', 'pop', 'lifeExp', 'gdpPercap']
 
-test = list(final_data.gdpPercap)
-while 0 in test:
-    test.remove(0)
-final_data = final_data[final_data.gdpPercap.isin(test)]
+# 去除异常数据行
+temp = list(final_data.gdpPercap)
+while -1 in temp:
+    temp.remove(-1)
+final_data = final_data[final_data.gdpPercap.isin(temp)]
 
-test = list(final_data.lifeExp)
-while 0 in test:
-    test.remove(0)
-final_data = final_data[final_data.lifeExp.isin(test)]
+temp = list(final_data.lifeExp)
+while -1 in temp:
+    temp.remove(-1)
+final_data = final_data[final_data.lifeExp.isin(temp)]
 
+# 重置索引
 final_data.index = [i for i in range(len(final_data))]
 
 
-final_data.to_excel('pop_lifeExp_gdpPercap.xlsx')
+final_data.to_excel('pop_lifeExp_gdpPercap.xlsx')  # 输出数据到pop_lifeExp_gdpPercap.xlsx
 
 
-# fig = px.scatter(final_data, x="lifeExp", y="gdpPercap", animation_frame="year",
-#                  animation_group="country",size="gdpPercap", color="continent",
-#                  hover_name="country",log_x=True, size_max=45)
-# plot(fig)
-
-
-
-# 自适应y轴
+# 自适应y轴（老师提供）
 years = [str(i) for i in range(2005, 2019)]
 
 continents = []
