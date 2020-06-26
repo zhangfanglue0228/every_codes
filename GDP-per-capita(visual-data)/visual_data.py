@@ -50,6 +50,13 @@ final_data['gdpPercap'] = gdp
 
 final_data.columns = ['country', 'continent', 'year', 'pop', 'lifeExp', 'gdpPercap']
 
+test = list(data.gdpPercap)
+while 0 in test:
+    test.remove(0)
+data[data.gdpPercap.isin(test)]
+data.index = [i for i in range(len(data))]
+
+
 final_data.to_excel('pop_lifeExp_gdpPercap.xlsx')
 # fig = px.scatter(final_data, x="lifeExp", y="gdpPercap", animation_frame="year",
 #                  animation_group="country",size="gdpPercap", color="continent",
