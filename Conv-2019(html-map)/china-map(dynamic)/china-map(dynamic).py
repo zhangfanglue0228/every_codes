@@ -23,15 +23,16 @@ for i in range(len(data)):
     time = data.index[i]
     #创建地图
     map_temp =(
-        Map(options.InitOpts(width='2400px', height='1200px', bg_color="#ffffff",page_title='中国疫情地图'))
+        Map()
         .add(time, sequence_temp, maptype="china")
         .set_global_opts(
-            title_opts=options.TitleOpts(title="全国疫情动态地图"),
+            legend_opts=options.LegendOpts(is_show=True, pos_left='left', pos_top='50%'),
+            title_opts=options.TitleOpts(title="全国疫情累计确诊动态地图"),
             visualmap_opts=options.VisualMapOpts(max_=2000),
         )
     )
     #将地图加入时间轴对象
-    timeline.add(map_temp,time).add_schema(play_interval=360)
+    timeline.add(map_temp,time).add_schema(play_interval=36)
     
 # 地图创建完成后，通过render()方法可以将地图渲染为html 
 timeline.render('全国疫情动态地图.html')
