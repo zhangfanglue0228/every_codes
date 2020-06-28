@@ -5,7 +5,7 @@ import re
 from snownlp import SnowNLP
 
 movie_names = []
-with open('movies_name.txt', 'r', encoding='utf-8') as f:
+with open('movie_names.txt', 'r', encoding='utf-8') as f:
     for line in f.readlines():
         movie_names.append(line.rstrip('\n'))
 
@@ -13,7 +13,7 @@ star_ave = []
 cotent_score_ave = []
 for movie_name in movie_names:
     print(movie_names.index(movie_name))
-    data = pd.read_excel(movie_name + "影评数据.xlsx")[['用户','是否看过此电影', '评分', '推荐度', '有用数', '评论日期', '评论内容']]
+    data = pd.read_excel("data/" + movie_name + "影评数据.xlsx")[['用户','是否看过此电影', '评分', '推荐度', '有用数', '评论日期', '评论内容']]
     
     temp = data['评分'].tolist()
     temp_list = []
@@ -22,7 +22,7 @@ for movie_name in movie_names:
             temp_list.append(30)
         else:
             temp_list.append(int(re.findall(r'\d+', i)[0]))
-    star_ave.append(sum(temp_list)/len(temp_list))
+    star_ave.append(sum(temp_list)/len(temp_list) * 50)
 
     temp = data['评论内容'].tolist()
     temp_list = []
