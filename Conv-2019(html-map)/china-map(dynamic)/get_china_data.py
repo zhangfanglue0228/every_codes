@@ -23,7 +23,16 @@ data = re.findall('\[(.*?)\]', data, re.S)
 data = [i.split(',') for i in data]
 data = np.array(data).T
 # 生成表格
-data = pd.DataFrame(data, columns=dates, index=provinces)
+# 生成表格
+try:
+    data = pd.DataFrame(data[0:len(dates)], columns=dates, index=provinces)
+except:
+    length = len(dates)
+    data_temp = data[:]
+    data = []
+    for i in data_temp:
+        data.append(i[0:length])
+    data = pd.DataFrame(data[0:len(dates)], columns=dates, index=provinces)
 data = data.astype('int')  # 转换str类型为int型
 last_colum = data.columns[-1]
 data = data.sort_values(last_colum, ascending=False)

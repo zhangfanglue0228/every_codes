@@ -14,6 +14,7 @@ for i in range(10):
     num = i * 25
     url = "https://movie.douban.com/top250?start=" + str(num) + "&filter="
     driver.get(url)
+    # 定位获取对应数据
     elem1 = driver.find_elements_by_xpath("//div[@class='info']/div[@class='hd']/a")
     elem2 = driver.find_elements_by_xpath("//div[@class='info']/div[@class='hd']/a/span[1]")
     for j in range(len(elem1)):
@@ -40,7 +41,7 @@ for i in range(len(movie_num_list)):
         num = i*20
         url = "https://movie.douban.com/subject/" + movie_num + "/comments?start=" + str(num) + "&limit=20&sort=new_score&status=P"
         driver.get(url)
-        #用户姓名 超链接
+        #用户姓名
         elem1 = driver.find_elements_by_xpath("//div[@class='avatar']/a")  
         # 是否看过此电影
         elem2 = driver.find_elements_by_xpath("//span[@class='comment-info']/span[1]")
