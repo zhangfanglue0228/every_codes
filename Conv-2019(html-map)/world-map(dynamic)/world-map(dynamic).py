@@ -59,7 +59,7 @@ for i in range(len(world_data)):
         .set_series_opts(label_opts=options.LabelOpts(is_show=False))
     )
     #将地图加入时间轴对象
-    timeline.add(map_temp,time).add_schema(play_interval=36)
+    timeline.add(map_temp,time).add_schema(play_interval=180)
 
 # 地图创建完成后，通过render()方法可以将地图渲染为html 
 timeline.render('世界疫情动态地图.html')
