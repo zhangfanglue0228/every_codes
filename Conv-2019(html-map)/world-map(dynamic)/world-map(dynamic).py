@@ -53,7 +53,7 @@ for i in range(len(world_data)):
         .add(time, sequence_temp, maptype="world", is_map_symbol_show=False)
         .set_global_opts(
             legend_opts=options.LegendOpts(is_show=True, pos_left='left', pos_top='50%'),
-            title_opts=options.TitleOpts(title="世界疫情现存确诊动态地图"),
+            title_opts=options.TitleOpts(title="世界疫情现存确诊动态地图", pos_left='center'),
             visualmap_opts=options.VisualMapOpts(max_=51000),
         )
         .set_series_opts(label_opts=options.LabelOpts(is_show=False))
