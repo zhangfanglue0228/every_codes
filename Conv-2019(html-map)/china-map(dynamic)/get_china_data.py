@@ -22,7 +22,7 @@ data = re.search('_g_map_data_data =\[(.*?)\];', home_rt, re.S).group(1)
 data = re.findall('\[(.*?)\]', data, re.S)
 data = [i.split(',') for i in data]
 data = np.array(data).T
-# 生成表格
+
 # 生成表格
 try:
     data = pd.DataFrame(data[0:len(dates)], columns=dates, index=provinces)
