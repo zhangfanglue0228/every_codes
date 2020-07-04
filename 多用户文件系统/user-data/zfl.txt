@@ -1,0 +1,3 @@
+s_files root None 7 d
+file1 root/s_files None 7 f
+file2 root/s_files None 7 f
