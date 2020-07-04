@@ -41,6 +41,17 @@ def alluser(user_info):
         print("%s\t\t\t%s" % (key, user_info[key]))
 
 
+def chmod(authority, param, path, dir_relationship):
+    for element in dir_relationship[path]:
+        if element.name == param:
+            if element.type == 'f':
+                element.change_authority(authority)
+            else:
+                print("This is not a file, you can't change its authority")
+            return
+    print("No such file or directory")
+
+
 def load(path, user_name, dir_relationship):
     load_user_info(user_name, dir_relationship)
     username = 'admin@' + user_name

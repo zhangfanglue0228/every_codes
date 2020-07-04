@@ -144,18 +144,6 @@ def delete(param, path, dir_relationship):
     print("No such file or directory")
 
 
-def chmod(authority, param, path, dir_relationship):
-    for element in dir_relationship[path]:
-        if element.name == param:
-            if element.type == 'f':
-                element.change_authority(authority)
-            else:
-                print("This is not a file, you can't change its authority")
-            return
-    print("No such file or directory")
-
-
-
 def save_user_info(user_name, dir_relationship):
     file_name = 'user-data/' + user_name + '.txt'
     with open(file_name, 'w') as f:
