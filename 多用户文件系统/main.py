@@ -44,7 +44,9 @@ while True:
     else:
         print("The password you entered is wrong, please try again")
         continue
-
+    
+    load_user_info(user_name, dir_relationship)
+    
     # Pass command
     while True:
         if user_name == 'admin':
@@ -69,18 +71,21 @@ while True:
                 load(path, username, dir_relationship)
             elif command == 'alluser':
                 alluser(user_info)
+            elif command == 'exit':
+                save_user_info(user_name, dir_relationship)
+                write_all_info(user_info)
+                break
             else:
                 print("%s: command not found" % command)
 
         else:
-            if flag == 1:
-                load_user_info(user_name, dir_relationship)
-                flag = flag - 1
             show_terminal(user_name, path)
             command, param = process_command()
             if command == 0 and param == 0:
                 continue
-            if command == 'cd':
+            if command == 'help':
+                help()
+            elif command == 'cd':
                 path = cd(param, path, dir_relationship)
             elif command == 'mkdir':
                 try:
@@ -110,11 +115,10 @@ while True:
                 delete(param, path, dir_relationship)
             elif command == 'clear':
                 clear()
+            elif command == 'exit':
+                save_user_info(user_name, dir_relationship)
+                # write_all_info(user_info)
+                break
             else:
                 print("%s: command not found" % command)
-        if command == 'exit':
-            if user_name != 'admin':
-                save_user_info(user_name, dir_relationship)
-            else:
-                write_all_info(user_info)
-            break
+

@@ -13,16 +13,16 @@ def show_terminal(usr_name, now_path):
 
 
 def help():
-    print("cd : enter a directory; parameter: directory-name")
-    print("mkdir : create a directory; parameter: directory-name [user-rights]")
-    print("ls : list the simple information of the file or directory in this directory; parameter: None")
-    print("ll : ls pro; parameter: None")
-    print("create : create a file to write; parameter: file-name [user-rights]")
-    print("write : write content in file; parameter: file-name")
-    print("read : show the content of the file; parameter:filen-ame")
-    print("delete : delete the file; parameter: file or directory-name")
-    print("clear : clear the terminal")
-    print("exit : exit the workspace of current user")
+    print("cd : enter a directory                                           parameter: directory-name")
+    print("mkdir : create a directory                                       parameter: directory-name [user-rights]")
+    print("ls : list the simple information of the file or directory        parameter: None")
+    print("ll : ls pro                                                      parameter: None")
+    print("create : create a file to write                                  parameter: file-name [user-rights]")
+    print("write : write content in file                                    parameter: file-name")
+    print("read : show the content of the file                              parameter:filen-ame")
+    print("delete : delete the file                                         parameter: file or directory-name")
+    print("clear : clear the terminal                                       parameter: None")
+    print("exit : exit the workspace of current user                        parameter: None")
 
 
 def clear(): os.system('cls')
