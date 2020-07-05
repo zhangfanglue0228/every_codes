@@ -21,7 +21,6 @@ def help():
     print("write : write content in file; parameter: file-name")
     print("read : show the content of the file; parameter:filen-ame")
     print("delete : delete the file; parameter: file or directory-name")
-    print("chmod : change the user rights; parameter: file-name user-rights")
     print("clear : clear the terminal")
     print("exit : exit the workspace of current user")
 
