@@ -19,14 +19,15 @@ def write_all_info(user_info):
             f.write("%s %s\n" % (key, user_info[key]))
 
 
-path = 'root'
-dir_relationship = {'root': []}
-user_info = load_all_info()
+
 
 clear()
 while True:
     # Login
     flag = 1
+    path = 'root'
+    dir_relationship = {'root': []}
+    user_info = load_all_info()
     print('Please enter your username and password(enter "exit" anywhere to exit system)')
     user_name = input("User name:")
     if user_name == 'exit':
@@ -68,7 +69,7 @@ while True:
                 createusr(username, password, user_info)
             elif command == 'load':
                 username = param
-                load(path, username, dir_relationship)
+                load(path, username)
             elif command == 'alluser':
                 alluser(user_info)
             elif command == 'exit':

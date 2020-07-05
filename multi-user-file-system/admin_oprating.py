@@ -54,7 +54,8 @@ def chmod(authority, param, path, dir_relationship):
     print("No such file or directory")
 
 
-def load(path, user_name, dir_relationship):
+def load(path, user_name):
+    dir_relationship = {'root': []}
     load_user_info(user_name, dir_relationship)
     username = 'admin@' + user_name
     while True:
