@@ -2,7 +2,7 @@ import os
 from operating import *
 
 
-def help():
+def admin_help():
     print("createusr: create a user                 parameter: username passward")
     print("deleteusr: delete a user                 parameter: username")
     print("changepwd: change a user's password      parameter: username new-password")

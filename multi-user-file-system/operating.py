@@ -12,7 +12,7 @@ def show_terminal(usr_name, now_path):
     print("%s @ %s$ " % (usr_name, now_path), end='')
 
 
-def help():
+def user_help():
     print("cd : enter a directory                                           parameter: directory-name")
     print("mkdir : create a directory                                       parameter: directory-name [user-rights]")
     print("ls : list the simple information of the file or directory        parameter: None")

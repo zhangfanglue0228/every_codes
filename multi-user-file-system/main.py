@@ -56,7 +56,7 @@ while True:
             if command == 0 and param == 0:
                 continue
             if command == 'help':
-                help()
+                admin_help()
             elif command == 'createusr':
                 username = param.split()[0]
                 password = param.split()[1]
@@ -85,7 +85,7 @@ while True:
             if command == 0 and param == 0:
                 continue
             if command == 'help':
-                help()
+                user_help()
             elif command == 'cd':
                 path = cd(param, path, dir_relationship)
             elif command == 'mkdir':
