@@ -50,76 +50,75 @@ while True:
     
     # Pass command
     while True:
-        if user_name == 'admin':
-            show_terminal(user_name, path)
-            command, param = process_command()
-            if command == 0 and param == 0:
+        show_terminal(user_name, path)
+        command, param = process_command()
+        if command == 0 and param == 0:
+            continue
+        if command == 'help':
+            user_help(user_name)
+        elif command == 'createuser':
+            if user_name != 'admin':
+                print("No permission to do this")
                 continue
-            if command == 'help':
-                admin_help()
-            elif command == 'createusr':
-                username = param.split()[0]
-                password = param.split()[1]
-                createusr(username, password, user_info)
-            elif command == 'deleteusr':
-                deleteusr(param, user_info)
-            elif command == 'changepwd':
-                username = param.split()[0]
-                password = param.split()[1]
-                createusr(username, password, user_info)
-            elif command == 'load':
-                username = param
-                load(path, username)
-            elif command == 'alluser':
-                alluser(user_info)
-            elif command == 'exit':
-                save_user_info(user_name, dir_relationship)
-                write_all_info(user_info)
-                break
-            else:
-                print("%s: command not found" % command)
-
+            username = param.split()[0]
+            password = param.split()[1]
+            createuser(username, password, user_info)
+        elif command == 'deleteuser':
+            if user_name != 'admin':
+                print("No permission to do this")
+                continue
+            deleteuser(param, user_info)
+        elif command == 'changepwd':
+            if user_name != 'admin':
+                print("No permission to do this")
+                continue
+            username = param.split()[0]
+            password = param.split()[1]
+            changepwd(username, password, user_info)
+        elif command == 'load':
+            if user_name != 'admin':
+                print("No permission to do this")
+                continue
+            username = param
+            load(path, username)
+        elif command == 'alluser':
+            if user_name != 'admin':
+                print("No permission to do this")
+                continue
+            alluser(user_info)
+        elif command == 'cd':
+            path = cd(param, path, dir_relationship)
+        elif command == 'mkdir':
+            try:
+                authority = int(param.split()[1])
+                param = param.split()[0]
+            except:
+                authority = 7
+            dir_object = element_class(param, path, authority, 'd')
+            mkdir(param, path, dir_object, dir_relationship)
+        elif command == 'ls':
+            ls(path, dir_relationship)
+        elif command == 'll':
+            ll(path, dir_relationship)
+        elif command == 'create':
+            try:
+                authority = int(param.split()[1])
+                param = param.split()[0]
+            except:
+                authority = 7
+            file_object = element_class(param, path, authority, 'f')
+            create(param, path, dir_relationship, file_object)
+        elif command == 'write':
+            write(param, path, dir_relationship)
+        elif command == 'read':
+            read(param, path, dir_relationship)
+        elif command == 'delete':
+            delete(param, path, dir_relationship)
+        elif command == 'clear':
+            clear()
+        elif command == 'exit':
+            save_user_info(user_name, dir_relationship)
+            write_all_info(user_info)
+            break
         else:
-            show_terminal(user_name, path)
-            command, param = process_command()
-            if command == 0 and param == 0:
-                continue
-            if command == 'help':
-                user_help()
-            elif command == 'cd':
-                path = cd(param, path, dir_relationship)
-            elif command == 'mkdir':
-                try:
-                    authority = int(param.split()[1])
-                    param = param.split()[0]
-                except:
-                    authority = 7
-                dir_object = element_class(param, path, authority, 'd')
-                mkdir(param, path, dir_object, dir_relationship)
-            elif command == 'ls':
-                ls(path, dir_relationship)
-            elif command == 'll':
-                ll(path, dir_relationship)
-            elif command == 'create':
-                try:
-                    authority = int(param.split()[1])
-                    param = param.split()[0]
-                except:
-                    authority = 7
-                file_object = element_class(param, path, authority, 'f')
-                create(param, path, dir_relationship, file_object)
-            elif command == 'write':
-                write(param, path, dir_relationship)
-            elif command == 'read':
-                read(param, path, dir_relationship)
-            elif command == 'delete':
-                delete(param, path, dir_relationship)
-            elif command == 'clear':
-                clear()
-            elif command == 'exit':
-                save_user_info(user_name, dir_relationship)
-                # write_all_info(user_info)
-                break
-            else:
-                print("%s: command not found" % command)
-
+            print("%s: command not found" % command)

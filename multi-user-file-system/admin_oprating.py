@@ -2,23 +2,16 @@ import os
 from operating import *
 
 
-def admin_help():
-    print("createusr: create a user                 parameter: username passward")
-    print("deleteusr: delete a user                 parameter: username")
-    print("changepwd: change a user's password      parameter: username new-password")
-    print("chmod : change the user rights           parameter: file-name user-rights")
-    print("load : load workspace as a user          parameter: user-name")
-    print("alluser: show all users' information")
-
-
-def createusr(user_name, password, user_info):
+def createuser(user_name, password, user_info):
+    '''创建一个新的用户'''
     if user_name in user_info.keys():
         print("The user you want to create is already in the user list")
         return
     user_info[user_name] = password
 
 
-def deleteusr(user_name, user_info):
+def deleteuser(user_name, user_info):
+    '''删除一个用户（取消该用户对文件系统的访问权）'''
     if user_name not in user_info.keys():
         print("The user you want to delete is not in the user list")
         return
@@ -31,19 +24,22 @@ def deleteusr(user_name, user_info):
 
 
 def changepwd(user_name, password, user_info):
-    if user_name not in user_info.keys():
-        print("The user you want to change password is not in the user list")
+    '''更改指定用户的登录密码'''
+    if user_name in user_info.keys():
+        user_info[user_name] = password
         return
-    user_info[user_name] = password
+    print("The user you want to change its passward is not in user list")
 
 
 def alluser(user_info):
+    '''列出所有用户的用户名和密码'''
     print("user name\t\tpassward")
     for key in user_info.keys():
         print("%s\t\t\t%s" % (key, user_info[key]))
 
 
 def chmod(authority, param, path, dir_relationship):
+    '''更改指定用户的指定文件的读、写、执行权限'''
     for element in dir_relationship[path]:
         if element.name == param:
             if element.type == 'f':
@@ -55,6 +51,7 @@ def chmod(authority, param, path, dir_relationship):
 
 
 def load(path, user_name):
+    '''加载指定用户的文件系统，对其内容进行操作'''
     dir_relationship = {'root': []}
     load_user_info(user_name, dir_relationship)
     username = 'admin@' + user_name

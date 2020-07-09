@@ -5,23 +5,8 @@ class element_class():
         self.content = ''
         self.authority = authority
         self.type = type_s
-        self.size = len(self.content)
+        self.size = 0
 
-    def add_path(self, path_2_add):
-        '''文件路径增加'''
-        self.path = self.path + path_2_add
-
-    def less_path(self, path_2_less):
-        '''文件路径减少'''
-        self.path.replace(path_2_less, '')
-
-    # def show_path(self):
-    #     '''展示文件路径'''
-    #     print(self.path)
-
-    def clear_content(self):
-        '''清除文件内容'''
-        self.content = ''
 
     def write_content(self, usr_content):
         '''更改文件内容'''
@@ -30,6 +15,9 @@ class element_class():
     def change_authority(self, authority_num):
         '''更改文件权限'''
         self.authority = authority_num
+
+    def change_size(self):
+        self.size = len(self.content)
 
     def show_element_info(self):
         authority_dict = {
