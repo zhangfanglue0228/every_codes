@@ -1,2 +1,0 @@
-s2_dir root None 7 d
-s2_file root/s2_dir None 7 f
